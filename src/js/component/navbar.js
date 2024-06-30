@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export const Navbar = () => {
 	return (
-		<nav className="navbar navbar-light bg-light mb-3">
+		<nav className="navbar navbar-light bg-white mb-3">
 			<div className="ms-auto me-3">
 				<Link to="/demo">
 					<button className="btn btn-success">Add new contact</button>

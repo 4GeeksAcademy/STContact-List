@@ -1,25 +1,29 @@
 import React from "react"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot,faPhone,faEnvelope,faPen,faTrash } from '@fortawesome/free-solid-svg-icons';
-export const Card = () => {
+import { Context } from "../store/appContext";
+export const Card = (props) => {
     return(
 
-            <div className="card mb-3">
+            <div className="card">
             <div className="row g-0">
               <div className="col-md-4">
-                <img src="https://cdn.pixabay.com/photo/2020/11/16/18/19/crocodile-5749911_640.jpg" className="img-fluid rounded-circle"/>
+                <img src="https://cdn.pixabay.com/photo/2020/04/13/20/48/dog-5040008_1280.jpg" className="img-fluid rounded-circle w-50 ms-4 "/>
               </div>
               <div className="col-md-4">
                 <div className="card-body">
-                  <h5 className="card-title">A little Crocodile</h5>
-                  <div>
-                    <FontAwesomeIcon icon={faLocationDot} />
-                    <FontAwesomeIcon icon={faPhone} />
-                    <FontAwesomeIcon icon={faEnvelope} />
-
-
+                  <h5 className="card-title">Perro Sanchez</h5>
+                  <div className="d-flex flex-column justify-content-start">
+                    <div className="d-flex mb-3 me-auto">
+                      <FontAwesomeIcon icon={faLocationDot} /><p className="ms-3">{props.loc}</p>
+                    </div>
+                    <div className="d-flex mb-3 me-auto">
+                      <FontAwesomeIcon icon={faPhone} /><p className="ms-3">{props.num}</p>
+                    </div>
+                    <div className="d-flex mb-3 me-auto">
+                      <FontAwesomeIcon icon={faEnvelope} /><p className="ms-3">{props.mail}</p>
+                    </div>
                   </div>
-                  
                 </div>
               </div>
               <div className="col-md-4 text-center mt-3">

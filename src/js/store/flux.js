@@ -4,6 +4,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			contacts: [
 				{
 					title: "FIRST",
+					//store.contacts.title
 				},
 				{
 					title: "SECOND",	
