@@ -13,6 +13,9 @@ import "../../styles/home.css";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
+
+	console.log(store)
+
 	return(
 	<div className="container">
 		<ul className="list-group">
@@ -21,13 +24,13 @@ export const Home = () => {
 					<li
 						key={index}
 						className="list-group-item d-flex justify-content-between border border-0">
-						<Card loc={item.title}/>
-						{console.log(item)}
+						<Card key={index} contactInfo={item}/>
+						
 					</li>
 					);
 			})}
 		</ul>
-		<p>Your current Agenda:</p>
+		<p>Your current Agenda: {store.agenda}</p>
 	</div>
 );
 }

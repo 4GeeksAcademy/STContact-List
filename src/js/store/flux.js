@@ -1,17 +1,39 @@
 const getState = ({ getStore, getActions, setStore }) => {
+
+
 	return {
 		store: {
-			contacts: [
-				{
-					title: "FIRST",
-					//store.contacts.title
-				},
-				{
-					title: "SECOND",	
-				}
-			]
+			agenda: "stcontacts",
+			contacts: []
 		},
 		actions: {
+			getContactslist: async () => {
+				try{
+					const response = await fetch("https://playground.4geeks.com/contact/agendas/stcontacts");
+					if (response.status == 404) {
+					 await getActions.NewContactlist();
+					}
+					const data = await response.json();
+					setStore({contacts: data.contacts})
+					}
+					catch (error) {
+					  console.error("Error:", error);
+					}
+				
+			
+			},
+			NewContactlist: async () => {
+				try {
+					await fetch("https://playground.4geeks.com/contact/agendas/stcontacts",
+					{
+						method: "POST",
+				  	}
+					);
+				  }
+				catch (error) {
+				  console.error("Error:", error);
+				  }
+			},
 			// Use getActions to call a function within a fuction
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
