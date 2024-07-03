@@ -14,8 +14,6 @@ import "../../styles/home.css";
 export const Home = () => {
 	const { store, actions } = useContext(Context);
 
-	console.log(store)
-
 	return(
 	<div className="container">
 		<ul className="list-group">

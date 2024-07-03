@@ -3,7 +3,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 	return {
 		store: {
-			agenda: "stcontacts",
+			agenda: "",
 			contacts: []
 		},
 		actions: {
@@ -15,6 +15,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 					const data = await response.json();
 					setStore({contacts: data.contacts})
+					setStore({agenda: data.slug})
 					}
 					catch (error) {
 					  console.error("Error:", error);
@@ -27,13 +28,33 @@ const getState = ({ getStore, getActions, setStore }) => {
 					await fetch("https://playground.4geeks.com/contact/agendas/stcontacts",
 					{
 						method: "POST",
-				  	}
-					);
+				  	});
+				  }
+				catch (error) {
+				  console.error("Error:", error);
+				  }
+			},//
+			DeleteContact: async (id) => {
+				
+				try {
+					const response = await fetch(`https://playground.4geeks.com/contact/agendas/stcontacts/contacts/${id}`,
+					{
+						method: "DELETE",
+				  	});
+					if(response.status === 204){
+						const store = getStore();
+
+						setStore({contacts: store.contacts.filter(contacts => contacts.id != id)});
+					}
 				  }
 				catch (error) {
 				  console.error("Error:", error);
 				  }
 			},
+
+
+			/*
+			/*
 			// Use getActions to call a function within a fuction
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
@@ -42,23 +63,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 				/**
 					fetch().then().then(data => setStore({ "foo": data.bar }))
 				*/
-			},
-			changeColor: (index, color) => {
+			//},
+			//changeColor: (index, color) => {
 				//get the store
-				const store = getStore();
+				// 
 
 				//we have to loop the entire demo array to look for the respective index
 				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
-				});
-
+				//const demo = store.demo.map((elm, i) => {
+					//if (i === index) elm.background = color;
+					//return elm;
+				//});
+				
 				//reset the global store
-				setStore({ demo: demo });
+				//setStore({ demo: demo });
 			}
 		}
 	};
-};
+//};
 
 export default getState;

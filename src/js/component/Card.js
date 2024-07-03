@@ -1,10 +1,13 @@
-import React from "react"
+import React, {useContext} from "react"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot,faPhone,faEnvelope,faPen,faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Context } from "../store/appContext";
 export const Card = ({contactInfo}) => {
+    const { store, actions } = useContext(Context);
+    const handleDelete = (id) => {
+      actions.DeleteContact(id);
+    }
     return(
-
             <div className="card">
             <div className="row g-0">
               <div className="col-md-4">
@@ -28,9 +31,10 @@ export const Card = ({contactInfo}) => {
               </div>
               <div className="col-md-4 text-center mt-3">
                 <button className="bg-white border border-0"> <FontAwesomeIcon icon={faPen} /> </button>
-                <button className="ms-4 bg-white border border-0" > <FontAwesomeIcon icon={faTrash} /> </button>
+                <button className="ms-4 bg-white border border-0" > <FontAwesomeIcon icon={faTrash} onClick={() => handleDelete(contactInfo.id) }/> </button>
               </div>
             </div>
           </div> 
     );
     }
+    //
