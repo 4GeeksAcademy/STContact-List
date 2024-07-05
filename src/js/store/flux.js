@@ -10,8 +10,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			getContactslist: async () => {
 				try{
 					const response = await fetch("https://playground.4geeks.com/contact/agendas/stcontacts");
-					if (response.status == 404) {
-					 await getActions.NewContactlist();
+					if (response.status === 404) {
+					 await getActions().NewContactlist();
 					}
 					const data = await response.json();
 					setStore({contacts: data.contacts})
@@ -24,11 +24,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 			
 			},
 			NewContactlist: async () => {
+	
 				try {
-					await fetch("https://playground.4geeks.com/contact/agendas/stcontacts",
+					const response = await fetch("https://playground.4geeks.com/contact/agendas/stcontacts",
 					{
 						method: "POST",
 				  	});
+					if(response.status === 201){
+						await getActions().getContactslist();
+					}
 				  }
 				catch (error) {
 				  console.error("Error:", error);
@@ -51,8 +55,30 @@ const getState = ({ getStore, getActions, setStore }) => {
 				  console.error("Error:", error);
 				  }
 			},
+			SubmitFormData: async (formData)=> {
+				try {
+					const response = await fetch('https://playground.4geeks.com/contact/agendas/stcontacts/contacts', {
+					  method: 'POST',
+					  headers: {
+						'accept': 'application/json',
+						'Content-Type': 'application/json'
+					  },
+					  body: JSON.stringify(formData)
+					});
+					if (response.ok){
+						await getActions().getContactslist();
+						
+					}
+				}
+				catch (error) {
+						console.error("Error:", error);
+				}
 
 
+				
+
+
+			}
 			/*
 			/*
 			// Use getActions to call a function within a fuction
