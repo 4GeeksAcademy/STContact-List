@@ -2,11 +2,20 @@ import React, {useContext} from "react"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot,faPhone,faEnvelope,faPen,faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Context } from "../store/appContext";
+import { Link } from "react-router-dom";
 export const Card = ({contactInfo}) => {
     const { store, actions } = useContext(Context);
     const handleDelete = (id) => {
       actions.DeleteContact(id);
     }
+    const handleEdit = (contactInfo) =>{
+      
+      console.log(contactInfo);
+
+
+
+    }
+     
     return(
             <div className="card">
             <div className="row g-0">
@@ -30,7 +39,9 @@ export const Card = ({contactInfo}) => {
                 </div>
               </div>
               <div className="col-md-4 text-center mt-3">
-                <button className="bg-white border border-0"> <FontAwesomeIcon icon={faPen} /> </button>
+                <Link to="/demo">
+                <button className="bg-white border border-0"> <FontAwesomeIcon icon={faPen} onClick={() => handleEdit(contactInfo)} /> </button>
+                </Link>
                 <button className="ms-4 bg-white border border-0" > <FontAwesomeIcon icon={faTrash} onClick={() => handleDelete(contactInfo.id) }/> </button>
               </div>
             </div>

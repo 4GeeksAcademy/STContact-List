@@ -24,6 +24,10 @@ export const Demo = () => {
 		}
 	  }, [formSubmitted]);
 
+
+
+
+	  
 	  const handleChange = (event) => {
 		const { name, value } = event.target;
 		setFormData((prevFormData) => ({
@@ -68,3 +72,9 @@ export const Demo = () => {
 	</div>
 	);
 };
+
+
+
+//hacer que cambie el h1 y las labels incluso los placeholders si se puede
+//desde ese form que es el mismo que para añadir enviamos una peticion diferente dependiendo de una variable que nos determina si es el form de añadir o de actualizar
+// el id sera clave por que sera el contacto que estaremos modificando en ambas partes  todo menos el id que se mantiene 

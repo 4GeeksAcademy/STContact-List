@@ -13,9 +13,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 					if (response.status === 404) {
 					 await getActions().NewContactlist();
 					}
-					const data = await response.json();
-					setStore({contacts: data.contacts})
-					setStore({agenda: data.slug})
+					if (response.status === 200) {
+						const data = await response.json();
+						setStore({contacts: data.contacts})
+						setStore({agenda: data.slug})
+					   }
+					
 					}
 					catch (error) {
 					  console.error("Error:", error);
@@ -24,7 +27,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			
 			},
 			NewContactlist: async () => {
-	
+				
 				try {
 					const response = await fetch("https://playground.4geeks.com/contact/agendas/stcontacts",
 					{
