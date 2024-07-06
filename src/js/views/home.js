@@ -13,7 +13,7 @@ import "../../styles/home.css";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
-
+	store.editMode = false;
 	return(
 	<div className="container">
 		<ul className="list-group">

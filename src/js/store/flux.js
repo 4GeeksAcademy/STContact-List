@@ -80,6 +80,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 			UpdateContact: async (formData) => {
+				console.log(formData);
 				try{
 				const response = await fetch( `https://playground.4geeks.com/contact/agendas/stcontacts/contacts/${formData.id}`, {
 					method: 'PUT',
@@ -98,14 +99,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				catch (error) {
 						console.error("Error:", error);
 				}
-
-
-
-
-
-
-
 			}
+
+
 			/*
 			/*
 			// Use getActions to call a function within a fuction

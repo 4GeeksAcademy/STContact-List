@@ -10,7 +10,8 @@ export const Demo = () => {
 		name: '',
 		phone: '',
 		email: '',
-		address: ''
+		address: '',
+		id: 0,
 	  });
 	  useEffect(() => {
 		
@@ -28,26 +29,22 @@ export const Demo = () => {
 	  
 		let edit = store.editMode ;
 		let contact = store.contactEdit;
-		console.log(edit);
-		// if(edit == true){
-		// 	setFormData({contact})
-		// 	// console.log(contact)
-		// 	edit = false;
-		// }
-	  
+		// console.log(contact);
+	
 	  const handleChange = (event) => {
 		const { name, value } = event.target;
 		setFormData((prevFormData) => ({
-		  ...prevFormData,
-		  [name]: value
+		  ...prevFormData, 
+		   [name]: value
 		}));
 	  };
 
 	  const handleSubmit = (event) => {
 		event.preventDefault();
 		if(edit == true){
+			formData.id = contact.id;
+			console.log(formData);
 			actions.UpdateContact(formData)
-			edit = false;
 		}else{
 			actions.SubmitFormData(formData);
 			setFormData({

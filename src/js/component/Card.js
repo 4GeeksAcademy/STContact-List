@@ -12,7 +12,7 @@ export const Card = ({contactInfo}) => {
        store.contactEdit = contactInfo;
        store.editMode = true;
     }
-     
+    //  console.log(contactInfo);
     return(
             <div className="card">
             <div className="row g-0">
