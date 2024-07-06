@@ -1,4 +1,4 @@
-import React, {useContext, useState} from "react"
+import React, {useContext} from "react"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot,faPhone,faEnvelope,faPen,faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Context } from "../store/appContext";
@@ -12,7 +12,6 @@ export const Card = ({contactInfo}) => {
        store.contactEdit = contactInfo;
        store.editMode = true;
     }
-    //  console.log(contactInfo);
     return(
             <div className="card">
             <div className="row g-0">
@@ -24,25 +23,34 @@ export const Card = ({contactInfo}) => {
                   <h5 className="card-title">{contactInfo.name}</h5>
                   <div className="d-flex flex-column justify-content-start">
                     <div className="d-flex mb-3 me-auto">
-                      <FontAwesomeIcon icon={faLocationDot} /><p className="ms-3">{contactInfo.address}</p>
+                      <FontAwesomeIcon icon={faLocationDot} />
+                      <p className="ms-3">{contactInfo.address}</p>
                     </div>
                     <div className="d-flex mb-3 me-auto">
-                      <FontAwesomeIcon icon={faPhone} /><p className="ms-3">{contactInfo.phone}</p>
+                      <FontAwesomeIcon icon={faPhone} />
+                      <p className="ms-3">{contactInfo.phone}</p>
                     </div>
                     <div className="d-flex mb-3 me-auto">
-                      <FontAwesomeIcon icon={faEnvelope} /><p className="ms-3">{contactInfo.email}</p>
+                      <FontAwesomeIcon icon={faEnvelope} />
+                      <p className="ms-3">{contactInfo.email}</p>
                     </div>
                   </div>
                 </div>
               </div>
               <div className="col-md-4 text-center mt-3">
                 <Link to="/demo">
-                <button className="bg-white border border-0"> <FontAwesomeIcon icon={faPen} onClick={() => handleEdit(contactInfo)} /> </button>
+                  <button className="bg-white border border-0"> 
+                    <FontAwesomeIcon icon={faPen} 
+                    onClick={() => handleEdit(contactInfo)} /> 
+                  </button>
                 </Link>
-                <button className="ms-4 bg-white border border-0" > <FontAwesomeIcon icon={faTrash} onClick={() => handleDelete(contactInfo.id) }/> </button>
+                <button className="ms-4 bg-white border border-0" > 
+                  <FontAwesomeIcon icon={faTrash} 
+                  onClick={() => handleDelete(contactInfo.id) }/> 
+                </button>
               </div>
             </div>
           </div> 
     );
     }
-    //
+    

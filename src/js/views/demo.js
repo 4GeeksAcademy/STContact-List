@@ -13,23 +13,8 @@ export const Demo = () => {
 		address: '',
 		id: 0,
 	  });
-	  useEffect(() => {
-		
-	  }, []);
-	//   if(store.contactEdit == {}){
-		
-	// 	console.log("estoy vacio")
-	//   }else{
-	// 	// setFormData(store.contactEdit);
-	// 	console.log("entro")
-	// 	console.log(store.contactEdit)
-	// //   }
-	// console.log(store.contactEdit)
-	// setFormData(store.contactEdit)
-	  
 		let edit = store.editMode ;
 		let contact = store.contactEdit;
-		// console.log(contact);
 	
 	  const handleChange = (event) => {
 		const { name, value } = event.target;
@@ -38,13 +23,17 @@ export const Demo = () => {
 		   [name]: value
 		}));
 	  };
-
 	  const handleSubmit = (event) => {
 		event.preventDefault();
 		if(edit == true){
 			formData.id = contact.id;
-			console.log(formData);
 			actions.UpdateContact(formData)
+			setFormData({
+				name: '',
+				phone: '',
+				email: '',
+				address: ''
+			  });
 		}else{
 			actions.SubmitFormData(formData);
 			setFormData({
@@ -54,12 +43,10 @@ export const Demo = () => {
 			address: ''
 		  });
 		}
-		
 	  };
-
 	return (
 	<div className="container">
-		<h1 className="text-center">Add a new contact </h1>
+		<h1 className="text-center">{edit ? 'Edit your contact' : 'Add a new contact'} </h1>
 		<form onSubmit={handleSubmit}>
   			<div class="mb-3">
     			<label for="PlaceName" className="form-label">Full Name</label>
@@ -88,8 +75,3 @@ export const Demo = () => {
 	</div>
 	);
 };
-
-
-
-//hacer que cambie el h1 y las labels incluso los placeholders si se puede
-//desde ese form que es el mismo que para añadir enviamos una peticion diferente dependiendo de una variable que nos determina si es el form de añadir o de actualizar
