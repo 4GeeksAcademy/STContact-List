@@ -5,7 +5,7 @@ import { Context } from "../store/appContext";
 
 export const Demo = () => {
 	const { store, actions } = useContext(Context);
-	const [formSubmitted, setFormSubmitted] = useState(false);
+	const [formEdit, setFormEdit] = useState();
 	const [formData, setFormData] = useState({
 		name: '',
 		phone: '',
@@ -13,20 +13,27 @@ export const Demo = () => {
 		address: ''
 	  });
 	  useEffect(() => {
-		if (formSubmitted) {
-		  setFormData({
-			name: '',
-			phone: '',
-			email: '',
-			address: ''
-		  });
-		  setFormSubmitted(false);
-		}
-	  }, [formSubmitted]);
-
-
-
-
+		
+	  }, []);
+	//   if(store.contactEdit == {}){
+		
+	// 	console.log("estoy vacio")
+	//   }else{
+	// 	// setFormData(store.contactEdit);
+	// 	console.log("entro")
+	// 	console.log(store.contactEdit)
+	// //   }
+	// console.log(store.contactEdit)
+	// setFormData(store.contactEdit)
+	  
+		let edit = store.editMode ;
+		let contact = store.contactEdit;
+		console.log(edit);
+		// if(edit == true){
+		// 	setFormData({contact})
+		// 	// console.log(contact)
+		// 	edit = false;
+		// }
 	  
 	  const handleChange = (event) => {
 		const { name, value } = event.target;
@@ -38,8 +45,19 @@ export const Demo = () => {
 
 	  const handleSubmit = (event) => {
 		event.preventDefault();
-		actions.SubmitFormData(formData);
-		setFormSubmitted(true);
+		if(edit == true){
+			actions.UpdateContact(formData)
+			edit = false;
+		}else{
+			actions.SubmitFormData(formData);
+			setFormData({
+			name: '',
+			phone: '',
+			email: '',
+			address: ''
+		  });
+		}
+		
 	  };
 
 	return (
@@ -63,7 +81,8 @@ export const Demo = () => {
     			<input type="text" name="address" onChange={handleChange} value={formData.address} className="form-control" id="PlaceEmail" placeholder="Enter Addres"/>
   			</div>
 			<div className="d-grid gap-2">
-  			<button type="submit" className="btn btn-primary">Save</button>
+			{!edit && <button type="submit" className="btn btn-primary">Save new contact</button>}
+			{edit && <button type="submit" className="btn btn-primary">Save changes</button> }
 			</div>
 		</form>
 		<Link to="/">
@@ -77,4 +96,3 @@ export const Demo = () => {
 
 //hacer que cambie el h1 y las labels incluso los placeholders si se puede
 //desde ese form que es el mismo que para añadir enviamos una peticion diferente dependiendo de una variable que nos determina si es el form de añadir o de actualizar
-// el id sera clave por que sera el contacto que estaremos modificando en ambas partes  todo menos el id que se mantiene 

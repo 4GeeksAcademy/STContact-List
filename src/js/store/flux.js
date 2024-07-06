@@ -4,7 +4,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			agenda: "",
-			contacts: []
+			contacts: [],
+			contactEdit:{},
+			editMode: false
 		},
 		actions: {
 			getContactslist: async () => {
@@ -76,9 +78,31 @@ const getState = ({ getStore, getActions, setStore }) => {
 				catch (error) {
 						console.error("Error:", error);
 				}
+			},
+			UpdateContact: async (formData) => {
+				try{
+				const response = await fetch( `https://playground.4geeks.com/contact/agendas/stcontacts/contacts/${formData.id}`, {
+					method: 'PUT',
+					headers: {
+					  'accept': 'application/json',
+					  'Content-Type': 'application/json'
+					},
+					body: JSON.stringify(formData)
+				});
+					if (response.ok){
+						console.log("se crea correctamente")
+						await getActions().getContactslist();
+						
+					}
+				}
+				catch (error) {
+						console.error("Error:", error);
+				}
 
 
-				
+
+
+
 
 
 			}

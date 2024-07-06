@@ -1,4 +1,4 @@
-import React, {useContext} from "react"
+import React, {useContext, useState} from "react"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot,faPhone,faEnvelope,faPen,faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Context } from "../store/appContext";
@@ -9,11 +9,8 @@ export const Card = ({contactInfo}) => {
       actions.DeleteContact(id);
     }
     const handleEdit = (contactInfo) =>{
-      
-      console.log(contactInfo);
-
-
-
+       store.contactEdit = contactInfo;
+       store.editMode = true;
     }
      
     return(
